@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://n3nhlfkx1njt" path="res://assets/2 GraveRobber/GraveRobber_idle.png" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://b3sn5uhl06njt" path="res://scripts/player.gd" id="1_onrkg"]
+[ext_resource type="Texture2D" uid="uid://b0ylpguk0lio6" path="res://assets/2 GraveRobber/GraveRobber_jump.png" id="3_i3pqv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
 atlas = ExtResource("1_4flbx")
@@ -19,6 +20,30 @@ region = Rect2(96, 0, 48, 48)
 atlas = ExtResource("1_4flbx")
 region = Rect2(144, 0, 48, 48)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b26j0"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7ghd"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvl01"]
+atlas = ExtResource("3_i3pqv")
+region = Rect2(240, 0, 48, 48)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_u0ya7"]
 animations = [{
 "frames": [{
@@ -35,12 +60,40 @@ animations = [{
 "texture": SubResource("AtlasTexture_sweqy")
 }],
 "loop": 1,
-"name": &"default",
+"name": &"idle",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dw050")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b26j0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n7ghd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nvl01")
+}],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_u0ya7"]
-radius = 13.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u0ya7"]
+radius = 16.0
+height = 78.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dtglo"]
+radius = 3.0
+height = 16.0
 
 [node name="player" type="CharacterBody2D" unique_id=1059462125]
 position = Vector2(28.248238, 19.579052)
@@ -50,8 +103,12 @@ script = ExtResource("1_onrkg")
 position = Vector2(14.751762, -9.579051)
 scale = Vector2(2.2447915, 2.3912761)
 sprite_frames = SubResource("SpriteFrames_u0ya7")
-frame_progress = 0.5475533
+animation = &"idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1911703967]
-position = Vector2(0.7517624, 32.420948)
-shape = SubResource("CircleShape2D_u0ya7")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1224185115]
+position = Vector2(-1.2482376, 8.420948)
+shape = SubResource("CapsuleShape2D_u0ya7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=898879341]
+position = Vector2(-20.248238, 10.420948)
+shape = SubResource("CapsuleShape2D_dtglo")

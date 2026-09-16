@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var bounce_velocity: float = -800.0
+@export var bounce_velocity: float = -650.0
 
 
 func _ready() -> void:
