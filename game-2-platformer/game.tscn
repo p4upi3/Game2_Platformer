@@ -3221,6 +3221,10 @@ target_position = Vector2(20, 0)
 position = Vector2(0, -30)
 target_position = Vector2(20, 0)
 
+[node name="LedgeCheckLeft" type="RayCast2D" parent="player" unique_id=350195195]
+position = Vector2(0, -30)
+target_position = Vector2(-17, 0)
+
 [node name="SpringPad" parent="." unique_id=1096941333 instance=ExtResource("3_feb5d")]
 position = Vector2(1408, -13)
 

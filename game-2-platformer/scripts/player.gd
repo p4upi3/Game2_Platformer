@@ -2,17 +2,30 @@ extends CharacterBody2D
 
 var speed = 300.0
 var jump_speed = -530.0
+var friction = 1400
+var acceleration = 1200
 
 var is_ledge_grabbing = false
 var can_ledge_grab = true
+
+var is_facing = 0
 
 @onready var wall_check = $WallCheckRight
 @onready var ledge_check = $LedgeCheckRight
 
 @onready var tilemap = $"../TileMap"
 
+func get_direction():
+	is_facing = Input.get_axis("ui_left", "ui_right")
+	
+	if not is_ledge_grabbing:
+		if is_facing > 0:
+			$AnimatedSprite2D.flip_h = false
+		if is_facing < 0:
+			$AnimatedSprite2D.flip_h = true
 
 func _physics_process(delta):
+	get_direction()
 	if not is_ledge_grabbing:
 		# Apply gravity
 		velocity += get_gravity() * delta
@@ -24,13 +37,26 @@ func _physics_process(delta):
 		# Jump animation while in the air
 		if not is_on_floor():
 			$AnimatedSprite2D.play("jump")
-
+		
+		# For horizontal movement
+		var current_speed = is_facing * speed
+		if is_facing != 0:
+			velocity.x = move_toward(velocity.x, current_speed, acceleration * delta)
+		else:
+			velocity.x = move_toward(velocity.x, current_speed, friction * delta)
+		
+		# Horizontal movement and idle animation
+		if is_on_floor():
+			if ((velocity.x < 0 or velocity.x > 0)):
+				$AnimatedSprite2D.play("run")
+			if velocity.x == 0:
+				$AnimatedSprite2D.play("idle")
+		
 		move_and_slide()
 
 		# Allow to grab again after landing
 		if is_on_floor():
 			can_ledge_grab = true
-			$AnimatedSprite2D.play("idle")
 
 		# Check for ledge while falling
 		if velocity.y > 0 and can_ledge_grab and can_grab_ledge():
@@ -56,6 +82,7 @@ func _physics_process(delta):
 		# Stay on ledge
 		else:
 			velocity = Vector2.ZERO
+			$AnimatedSprite2D.play("ledge")
 
 		move_and_slide()
 		return
