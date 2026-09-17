@@ -156,12 +156,13 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u0ya7"]
-radius = 11.0
-height = 60.0
+height = 44.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dtglo"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wt34f"]
+radius = 2.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yex4w"]
 radius = 3.0
-height = 16.0
 
 [node name="player" type="CharacterBody2D" unique_id=1059462125]
 position = Vector2(28.248238, 19.579052)
@@ -171,12 +172,17 @@ script = ExtResource("1_onrkg")
 position = Vector2(0.31426716, 4.6162634)
 scale = Vector2(1.6432292, 1.7998048)
 sprite_frames = SubResource("SpriteFrames_u0ya7")
-animation = &"ledge"
+animation = &"idle"
+frame_progress = 0.018171726
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1224185115]
-position = Vector2(-0.24823761, 17.420948)
+position = Vector2(-3.2482376, 9.420948)
 shape = SubResource("CapsuleShape2D_u0ya7")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=898879341]
-position = Vector2(-1.2482376, 15.420948)
-shape = SubResource("CapsuleShape2D_dtglo")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=263645447]
+position = Vector2(-9.248238, 32.420948)
+shape = SubResource("CapsuleShape2D_wt34f")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="." unique_id=565505871]
+position = Vector2(8.751762, 32.420948)
+shape = SubResource("CapsuleShape2D_yex4w")
